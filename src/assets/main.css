@@ -1,0 +1,69 @@
+/* tableau */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  th, td {
+    padding: auto;
+    border: 1px solid #ddd;
+    text-align: left;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #343a40;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  }
+  /* Barre de navigation */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #343a40;
+    padding: 1em;
+  }
+  
+ 
+  .nav-link {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    transition: background-color 0.3s;
+  }
+  
+
+  .nav-link:hover {
+    background-color: #4950574b;
+    border-radius: 5px;
+  }
+  
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav-link {
+      margin: 5px 0;
+    }
+  }
+  
