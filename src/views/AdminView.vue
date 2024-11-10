@@ -42,7 +42,6 @@ const isMenuOpen = ref(false);
   </nav>
   <RouterView></RouterView>
   <body>
-    <div><RouterLink to="/admin/ajoutClient" >Ajouter un Client</RouterLink><RouterLink to="/admin/ajoutColis" >  Ajouter un colis</RouterLink></div>
   </body>
 </template>
 

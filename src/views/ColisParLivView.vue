@@ -10,7 +10,7 @@ const mesColis = ref<Colis[]>([]);
 
 onMounted(async () => {
   const idLivraison = route.params.IdLivraison;
-  const colisRequest = await fetch(`/api/admin/get-colis/${idLivraison}`);
+  const colisRequest = await fetch(`/api/admin/get-colis/Liv/${idLivraison}`);
   const colis = await colisRequest.json();
   mesColis.value = [...colis];
   console.log(mesColis.value);
@@ -31,6 +31,7 @@ onMounted(async () => {
       </tr>
       <ColisComponent v-for="(element, index) in mesColis" :colis="element" v-bind:key="index" />
     </tbody>
-  </table>
+  </table>    
+  <div><RouterLink to="/admin/ajoutColis" >  Ajouter un colis</RouterLink></div>
   <FooterComponent />
 </template>

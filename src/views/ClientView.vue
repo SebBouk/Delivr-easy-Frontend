@@ -31,5 +31,6 @@ onMounted(async () => {
       />
     </tbody>
   </table>
+  <div><RouterLink to="/admin/ajoutClient" >Ajouter un Client</RouterLink></div>
   <FooterComponent />
 </template>

@@ -11,7 +11,7 @@ const TourneeRouteur = useRouter()
 
 
 function goToColis() {
-    ColisRouteur.push(`/colis/${props.livraison.IdLivraison}`);
+    ColisRouteur.push(`/colis/Liv/${props.livraison.IdLivraison}`);
 }
 function gotoTournee(){
     TourneeRouteur.push(`/tournee`)

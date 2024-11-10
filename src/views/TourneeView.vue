@@ -16,18 +16,22 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminView/>
+  <AdminView />
   <table>
     <tbody>
       <tr>
         <th>Id Tournée</th>
         <th>Date programée</th>
+        <th>Modifier la date</th>
         <th>Assignation tournée</th>
         <th>Livraisons</th>
       </tr>
-      <TourneeComponent v-for="(element, index) in mesTournee" :tournee="element" v-bind:key="index"
+      <TourneeComponent
+        v-for="(element, index) in mesTournee"
+        :tournee="element"
+        v-bind:key="index"
       />
     </tbody>
   </table>
-  <FooterComponent/>
+  <FooterComponent />
 </template>
