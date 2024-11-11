@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AdminView from '@/views/AdminView.vue';
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 
 const AdresseColis = ref('');
@@ -8,6 +8,9 @@ const ContactColis = ref('');
 const PoidColis = ref('');
 const DateLivColis = ref('');
 const router = useRouter(); 
+const props = defineProps<{
+  colis : Colis
+}>();
 
 async function addColis() {
   try {
