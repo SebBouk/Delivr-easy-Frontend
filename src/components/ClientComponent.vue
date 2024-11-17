@@ -2,6 +2,7 @@
 import { Client } from '@/models/Client';
 import { useRouter } from 'vue-router';
 
+
 const props = defineProps<{
     client : Client;
 }>();
@@ -10,6 +11,7 @@ const props = defineProps<{
 function goToCommandes() {
     clientCommandeRouteur.push(`/commandes/Client/${props.client.IdClient}`);
 }
+const router = useRouter()
 async function addCommande() {
   try {
     const response = await fetch('/api/admin/ajoutCommande', {

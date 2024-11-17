@@ -105,7 +105,7 @@ const router = createRouter({
       component: AjoutClient
     },
     {
-      path: '/admin/ajoutColis',
+      path: '/admin/ajoutColis/:IdCommande',
       name: 'ajout_colis',
       component: AjoutColis
     }

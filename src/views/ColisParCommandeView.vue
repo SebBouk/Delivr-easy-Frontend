@@ -15,6 +15,8 @@ onMounted(async () => {
   mesColis.value = [...colis];
   console.log(mesColis.value);
 });
+
+
 </script>
 
 <template>
@@ -32,6 +34,7 @@ onMounted(async () => {
       <ColisComponent v-for="(element, index) in mesColis" :colis="element" v-bind:key="index" />
     </tbody>
   </table>
-  <div><RouterLink to="/admin/ajoutColis" >  Ajouter un colis</RouterLink></div>
+  <div><RouterLink :to="`/admin/ajoutColis/${route.params.IdCommande}`">Ajouter un colis</RouterLink>
+  </div>
   <FooterComponent />
 </template>

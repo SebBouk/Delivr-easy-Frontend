@@ -31,6 +31,5 @@ onMounted(async () => {
       <ColisComponent v-for="(element, index) in mesColis" :colis="element" v-bind:key="index" />
     </tbody>
   </table>
-  <div><RouterLink to="/admin/ajoutColis" >  Ajouter un colis</RouterLink></div>
   <FooterComponent />
 </template>

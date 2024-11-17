@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import AdminView from '@/views/AdminView.vue';
-import { ref, defineProps } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const AdresseColis = ref('');
 const ContactColis = ref('');
 const PoidColis = ref('');
 const DateLivColis = ref('');
-const router = useRouter(); 
-const props = defineProps<{
-  colis : Colis
-}>();
+const route = useRoute();
+const router = useRouter()
+
 
 async function addColis() {
   try {
-    const response = await fetch('/api/admin/ajoutColis', {
+    const IdCommande = route.params.IdCommande
+    const response = await fetch(`/api/admin/ajoutColis/${IdCommande}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,6 +24,7 @@ async function addColis() {
         ContactColis: ContactColis.value,
         PoidColis: PoidColis.value,
         DateLivColis: DateLivColis.value,
+        IdCommande: IdCommande,
       }),
     });
 
