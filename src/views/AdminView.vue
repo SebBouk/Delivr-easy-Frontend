@@ -36,6 +36,7 @@ const isMenuOpen = ref(false);
 </script>
 
 <template>
+  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
     <div class="hidden md:block text-gray-700">
         <span>Bienvenue, {{ username }}</span>
       </div>
@@ -69,6 +70,7 @@ const isMenuOpen = ref(false);
       </div>
     </div>
   </nav>
+</div>
 
   <RouterView></RouterView>
 </template>

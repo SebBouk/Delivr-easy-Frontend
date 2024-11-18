@@ -16,7 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="p-6 bg-gray-100 min-h-screen space-y-6">
+  <div>
     <AdminView />
     <div class="overflow-x-auto bg-white rounded-lg shadow-md">
       <table class="w-full border-collapse text-left">

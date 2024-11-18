@@ -68,7 +68,7 @@ onMounted(() => {
 
 
 <template>
-  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
+  <div>
     <AdminView />
     <div class="overflow-x-auto bg-white rounded-lg shadow-md">
       <div class="flex justify-between items-center mb-4">
