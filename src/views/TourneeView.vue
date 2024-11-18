@@ -66,10 +66,11 @@ onMounted(() => {
 
 </script>
 
+
 <template>
-  <div class="flex flex-col items-center min-h-screen bg-gray-100">
+  <div class="flex flex-col min-h-screen bg-gray-100">
     <AdminView />
-    <div class="w-full max-w-6xl p-6 bg-white rounded-lg shadow-md mt-6">
+    <div class="w-full  p-6 bg-white rounded-lg shadow-md mt-6">
       <div class="flex justify-between items-center mb-4">
         <h1 class="text-xl font-semibold">Gestion des Tournées</h1>
         <button
