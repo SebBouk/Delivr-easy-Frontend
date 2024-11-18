@@ -18,20 +18,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminView/>
-  <table>
-    <tbody>
-      <tr>
-        <th>Id Commande</th>
-        <th>Nom Client</th>
-        <th>Colis</th>
-      </tr>
-      <CommandeComponent
-        v-for="(element, index) in mesCommandes"
-        :commande="element"
-        v-bind:key="index"
-      />
-    </tbody>
-  </table>
-  <FooterComponent/>
+  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
+    <AdminView />
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+      <table class="w-full border-collapse text-left">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="p-3 text-sm font-medium">Id Commande</th>
+            <th class="p-3 text-sm font-medium">Nom Client</th>
+            <th class="p-3 text-sm font-medium">Colis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <CommandeComponent
+            v-for="(element, index) in mesCommandes"
+            :commande="element"
+            :key="index"
+            class="odd:bg-white even:bg-gray-50"
+          />
+        </tbody>
+      </table>
+    </div>
+    <FooterComponent />
+  </div>
 </template>

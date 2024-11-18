@@ -67,24 +67,39 @@ onMounted(() => {
 </script>
 
 <template>
-  <AdminView />
-  <table>
-    <button @click="createTournee" class="btn-create-tournee">Créer une Tournée</button>
-    <tbody>
-      <tr>
-        <th>Id Tournée</th>
-        <th>Date programée</th>
-        <th>Modifier la date</th>
-        <th>Assignation tournée</th>
-        <th>Livraisons</th>
-      </tr>
-      <TourneeComponent
-        v-for="(element, index) in mesTournee"
-        :tournee="element"
-        v-bind:key="index"
-        @create-livraison="createLivraison"
-      />
-    </tbody>
-  </table>
-  <FooterComponent />
+  <div class="flex flex-col items-center min-h-screen bg-gray-100">
+    <AdminView />
+    <div class="w-full max-w-6xl p-6 bg-white rounded-lg shadow-md mt-6">
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-semibold">Gestion des Tournées</h1>
+        <button
+          @click="createTournee"
+          class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Créer une Tournée
+        </button>
+      </div>
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 p-2 text-left">Id Tournée</th>
+            <th class="border border-gray-300 p-2 text-left">Date programmée</th>
+            <th class="border border-gray-300 p-2 text-left">Modifier la date</th>
+            <th class="border border-gray-300 p-2 text-left">Assignation tournée</th>
+            <th class="border border-gray-300 p-2 text-left">Livraisons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <TourneeComponent
+            v-for="(element, index) in mesTournee"
+            :tournee="element"
+            v-bind:key="index"
+            @create-livraison="createLivraison"
+            class="odd:bg-white even:bg-gray-50"
+          />
+        </tbody>
+      </table>
+    </div>
+    <FooterComponent class="mt-6" />
+  </div>
 </template>

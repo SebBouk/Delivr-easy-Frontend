@@ -20,21 +20,38 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminView/>
-  <table>
-    <tbody>
-      <tr>
-        <th>Numero de Colis</th>
-        <th>Adresse de livraison</th>
-        <th>Contact</th>
-        <th>Date de livraison prévu</th>
-        <th>Poid</th>
-        <th>Livraison</th>
-      </tr>
-      <ColisComponent v-for="(element, index) in mesColis" :colis="element" v-bind:key="index" />
-    </tbody>
-  </table>
-  <div><RouterLink :to="`/admin/ajoutColis/${route.params.IdCommande}`">Ajouter un colis</RouterLink>
+  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
+    <AdminView />
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+      <table class="w-full border-collapse text-left">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="p-3 text-sm font-medium">Numéro de Colis</th>
+            <th class="p-3 text-sm font-medium">Adresse de livraison</th>
+            <th class="p-3 text-sm font-medium">Contact</th>
+            <th class="p-3 text-sm font-medium">Date de livraison prévue</th>
+            <th class="p-3 text-sm font-medium">Poids</th>
+            <th class="p-3 text-sm font-medium">Livraison</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ColisComponent
+            v-for="(element, index) in mesColis"
+            :colis="element"
+            :key="index"
+            class="odd:bg-white even:bg-gray-50"
+          />
+        </tbody>
+      </table>
+    </div>
+    <div class="flex justify-end mt-4">
+      <RouterLink
+        :to="`/admin/ajoutColis/${route.params.IdCommande}`"
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+      >
+        Ajouter un colis
+      </RouterLink>
+    </div>
+    <FooterComponent />
   </div>
-  <FooterComponent />
 </template>

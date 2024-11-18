@@ -21,15 +21,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminView/>
-  <table>
-    <tbody>
-      <tr>
-        <th>Numero de livraison</th>
-        <th>Signature</th>
-      </tr>
-      <LivraisonComponent v-for="(element, index) in mesLivraison" :livraison="element" v-bind:key="index" />
-    </tbody>
-  </table>
-  <FooterComponent />
+  <div class="p-6 bg-gray-100 min-h-screen space-y-6">
+    <AdminView />
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="p-3 text-left text-sm font-medium">Numéro de livraison</th>
+            <th class="p-3 text-left text-sm font-medium">Signature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <LivraisonComponent
+            v-for="(element, index) in mesLivraison"
+            :livraison="element"
+            :key="index"
+            class="odd:bg-white even:bg-gray-50"
+          />
+        </tbody>
+      </table>
+    </div>
+    <FooterComponent />
+  </div>
 </template>
+
