@@ -22,7 +22,7 @@ async function addCommande() {
 
     if (response.ok) {
       alert('Commande ajouté avec succès !');
-      router.push('/commande'); 
+      router.push('/commandes'); 
       
     } else {
       alert('Erreur lors de l’ajout de la commande');

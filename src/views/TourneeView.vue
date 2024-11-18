@@ -68,9 +68,9 @@ onMounted(() => {
 
 
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
     <AdminView />
-    <div class="w-full  p-6 bg-white rounded-lg shadow-md mt-6">
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
       <div class="flex justify-between items-center mb-4">
         <h1 class="text-xl font-semibold">Gestion des Tournées</h1>
         <button
@@ -80,14 +80,14 @@ onMounted(() => {
           Créer une Tournée
         </button>
       </div>
-      <table class="w-full border-collapse border border-gray-300">
+      <table class="w-full border-collapse text-left">
         <thead>
-          <tr class="bg-gray-200">
-            <th class="border border-gray-300 p-2 text-left">Id Tournée</th>
-            <th class="border border-gray-300 p-2 text-left">Date programmée</th>
-            <th class="border border-gray-300 p-2 text-left">Modifier la date</th>
-            <th class="border border-gray-300 p-2 text-left">Assignation tournée</th>
-            <th class="border border-gray-300 p-2 text-left">Livraisons</th>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="p-3 text-sm font-medium">Id Tournée</th>
+            <th class="p-3 text-sm font-medium">Date programmée</th>
+            <th class="p-3 text-sm font-medium">Modifier la date</th>
+            <th class="p-3 text-sm font-medium">Assignation tournée</th>
+            <th class="p-3 text-sm font-medium">Livraisons</th>
           </tr>
         </thead>
         <tbody>
