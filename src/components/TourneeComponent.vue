@@ -7,18 +7,54 @@ const props = defineProps<{
   tournee: TourneeAvecEmploye;
 }>();
 
+const emit = defineEmits(['create-livraison']);
+
 const livRouteur = useRouter();
 const isEditing = ref(false);
 const DateTournee = ref(props.tournee.DateTournee || '');
 const IdTournee = ref(props.tournee.IdTournee);
 
-const employes = ref<{ IdEmploye: number; NomEmploye: string }[]>([]); // Liste des employés
-const selectedEmployeId = ref<number | null>(props.tournee.IdEmploye || null); // Employé sélectionné
-const emit = defineEmits(['create-livraison']);
+const employes = ref<{ IdEmploye: number; NomEmploye: string }[]>([]);
+const selectedEmployeId = ref<number | null>(props.tournee.IdEmploye || null);
+
+const notifications = ref<
+  {
+    id: number;
+    type: 'success' | 'error';
+    message: string;
+    appearing: boolean;
+    disappearing: boolean;
+  }[]
+>([]);
+
+let notificationId = 0;
+
+function showNotification(type: 'success' | 'error', message: string) {
+  const id = ++notificationId;
+  const newNotification = { id, type, message, appearing: true, disappearing: false };
+  notifications.value.push(newNotification);
+
+  // Supprime la classe `appearing` après l'animation d'apparition (0.5 seconde)
+  setTimeout(() => {
+    const notif = notifications.value.find((n) => n.id === id);
+    if (notif) notif.appearing = false;
+  }, 10);
+
+  // Marque la notification pour disparaître après 4 secondes
+  setTimeout(() => {
+    const notif = notifications.value.find((n) => n.id === id);
+    if (notif) notif.disappearing = true;
+
+    // Supprime complètement la notification après la transition (1 seconde)
+    setTimeout(() => {
+      notifications.value = notifications.value.filter((n) => n.id !== id);
+    }, 1000);
+  }, 4000);
+}
 
 async function createLivraison() {
   if (!props.tournee.IdEmploye) {
-    alert('Aucun employé assigné à cette tournée.');
+    showNotification('error', 'Aucun employé assigné à cette tournée.');
     return;
   }
 
@@ -33,14 +69,15 @@ async function createLivraison() {
     });
 
     if (!response.ok) {
-      alert('Erreur lors de la création de la livraison.');
+      showNotification('error', 'Erreur lors de la création de la livraison.');
+    } else {
+      showNotification('success', 'Livraison créée avec succès.');
     }
   } catch (error) {
     console.error('Erreur lors de la création de la livraison :', error);
-    alert('Erreur serveur. Veuillez réessayer plus tard.');
+    showNotification('error', 'Erreur serveur. Veuillez réessayer plus tard.');
   }
 }
-
 
 function goToLivraison() {
   livRouteur.push(`/livraison/${props.tournee.IdTournee}`);
@@ -48,12 +85,15 @@ function goToLivraison() {
 
 onMounted(async () => {
   try {
-    const response = await fetch('/api/admin/get-livreurs'); // Correction de la route
+    const response = await fetch('/api/admin/get-livreurs');
     if (!response.ok) throw new Error('Erreur lors du chargement des livreurs');
     employes.value = await response.json();
   } catch (error) {
     console.error('Erreur lors de la récupération des employés :', error);
-    alert('Impossible de charger la liste des livreurs. Veuillez réessayer plus tard.');
+    showNotification(
+      'error',
+      'Impossible de charger la liste des livreurs. Veuillez réessayer plus tard.'
+    );
   }
 });
 
@@ -65,23 +105,26 @@ async function addDate() {
       body: JSON.stringify({ DateTournee: DateTournee.value, IdTournee: IdTournee.value })
     });
     if (response.ok) {
-      alert('Date ajouté avec succès !');
+      showNotification('success', 'Date ajoutée avec succès.');
       props.tournee.DateTournee = DateTournee.value;
     } else {
-      alert('Erreur lors de l’ajout de la date');
+      showNotification('error', 'Erreur lors de l’ajout de la date.');
     }
   } catch (error) {
     console.error('Erreur :', error);
+    showNotification('error', 'Erreur serveur. Veuillez réessayer plus tard.');
   }
 }
+
 function cancelEdit() {
   isEditing.value = false;
   DateTournee.value = props.tournee.DateTournee;
-  selectedEmployeId.value = props.tournee.IdEmploye; // Annule les changements non enregistrés
+  selectedEmployeId.value = props.tournee.IdEmploye;
 }
+
 async function updateEmploye() {
   if (selectedEmployeId.value === props.tournee.IdEmploye) {
-    alert('Aucune modification détectée.');
+    showNotification('error', 'Aucune modification détectée.');
     return;
   }
 
@@ -93,17 +136,17 @@ async function updateEmploye() {
     });
 
     if (response.ok) {
-      alert('Employé mis à jour avec succès !');
+      showNotification('success', 'Employé mis à jour avec succès.');
       props.tournee.IdEmploye = selectedEmployeId.value;
       props.tournee.NomEmploye =
         employes.value.find((e) => e.IdEmploye === selectedEmployeId.value)?.NomEmploye || '';
       isEditing.value = false;
     } else {
-      alert("Erreur lors de la mise à jour de l'employé.");
+      showNotification('error', "Erreur lors de la mise à jour de l'employé.");
     }
   } catch (error) {
     console.error("Erreur lors de la mise à jour de l'employé :", error);
-    alert('Erreur serveur. Veuillez réessayer plus tard.');
+    showNotification('error', 'Erreur serveur. Veuillez réessayer plus tard.');
   }
 }
 
@@ -140,7 +183,71 @@ const formattedDate = computed(() => {
       <button @click="goToLivraison">Livraisons</button>
     </td>
     <td>
-      <button @click="createLivraison">Créé une livraisons</button>
+      <button @click="createLivraison">Créer une livraison</button>
     </td>
   </tr>
+  <div class="notification-container">
+    <div
+      v-for="notif in notifications"
+      :key="notif.id"
+      :class="[
+        'notification',
+        notif.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700',
+        notif.appearing ? 'appearing' : '',
+        notif.disappearing ? 'disappearing' : ''
+      ]"
+    >
+      {{ notif.message }}
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.notification {
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.notification.appearing {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.notification.disappearing {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.bg-green-100 {
+  background-color: rgba(209, 250, 229, 0.9);
+}
+
+.text-green-700 {
+  color: #047857;
+}
+
+.bg-red-100 {
+  background-color: rgba(254, 226, 226, 0.9);
+}
+
+.text-red-700 {
+  color: #b91c1c;
+}
+</style>

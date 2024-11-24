@@ -66,3 +66,51 @@ tr:hover {
     margin: 5px 0;
   }
 }
+
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.notification {
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.notification.appearing {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.notification.disappearing {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.bg-green-100 {
+  background-color: rgba(209, 250, 229, 0.9);
+}
+
+.text-green-700 {
+  color: #047857;
+}
+
+.bg-red-100 {
+  background-color: rgba(254, 226, 226, 0.9);
+}
+
+.text-red-700 {
+  color: #b91c1c;
+}

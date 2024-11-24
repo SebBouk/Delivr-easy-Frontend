@@ -15,6 +15,7 @@ import AjoutClient from '@/components/AjoutClient.vue';
 import AjoutColis from '@/components/AjoutColis.vue';
 import ColisParCommandeView from '@/views/ColisParCommandeView.vue';
 import CommandeClientView from '@/views/CommandeClientView.vue';
+import EmployeView from '@/views/EmployeView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,11 +75,11 @@ const router = createRouter({
       name: 'colis_Commande',
       component: ColisParCommandeView
     },
-    // {
-    //   // path:'/livreur',
-    //   // name:'livreur',
-    //   // component: LivreurView
-    //   // },
+    {
+      path:'/employe',
+      name:'employe',
+      component: EmployeView
+      },
     {
       path: '/signature/:NumColis',
       name: 'PageSignature',

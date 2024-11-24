@@ -32,6 +32,10 @@ onMounted(async () => {
             <th class="p-3 text-sm font-medium">Date de livraison prévue</th>
             <th class="p-3 text-sm font-medium">Poids</th>
             <th class="p-3 text-sm font-medium">Livraison</th>
+            <th class="col-span-3 p-3 text-sm font-medium "></th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

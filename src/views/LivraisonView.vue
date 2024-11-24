@@ -29,6 +29,7 @@ onMounted(async () => {
           <tr class="bg-gray-200 text-gray-700">
             <th class="p-3 text-left text-sm font-medium">Numéro de livraison</th>
             <th class="p-3 text-left text-sm font-medium">Signature</th>
+            <th class="col-span-3 p-3 text-sm font-medium "></th>
           </tr>
         </thead>
         <tbody>

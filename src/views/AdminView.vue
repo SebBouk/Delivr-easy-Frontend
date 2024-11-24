@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref, computed } from 'vue';
 const router = useRouter();
+const route = useRoute();
 
 const logout = () => {
   document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -36,7 +37,7 @@ const isMenuOpen = ref(false);
 </script>
 
 <template>
-  <div class="p-6 bg-gray-100 min-h-screen flex flex-col space-y-6">
+
     <div class="hidden md:block text-gray-700">
         <span>Bienvenue, {{ username }}</span>
       </div>
@@ -61,6 +62,7 @@ const isMenuOpen = ref(false);
         <RouterLink to="/commandes" class="nav-link block text-gray-700 hover:text-blue-500">Commandes</RouterLink>
         <RouterLink to="/livraison" class="nav-link block text-gray-700 hover:text-blue-500">Livraisons</RouterLink>
         <RouterLink to="/Tournee" class="nav-link block text-gray-700 hover:text-blue-500">Tournées</RouterLink>
+        <RouterLink to="/Employe" class="nav-link block text-gray-700 hover:text-blue-500">Employés</RouterLink>
         <button
           @click="logout"
           class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 w-full md:w-auto"
@@ -70,7 +72,9 @@ const isMenuOpen = ref(false);
       </div>
     </div>
   </nav>
-</div>
+  <div v-if="route.path === '/admin'">
+    <img src="/src/assets/Image_DelivrEasy.jpg" alt="Image de la page d'accueil" class="w-full h-full object-contain">
+  </div>
 
   <RouterView></RouterView>
 </template>

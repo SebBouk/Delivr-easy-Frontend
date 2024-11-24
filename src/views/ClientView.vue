@@ -26,6 +26,8 @@ onMounted(async () => {
             <th class="p-3 text-sm font-medium">Nom Client</th>
             <th class="p-3 text-sm font-medium">Adresse de facturation</th>
             <th class="p-3 text-sm font-medium">Contact</th>
+            <th class="col-span-3 p-3 text-sm font-medium "></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

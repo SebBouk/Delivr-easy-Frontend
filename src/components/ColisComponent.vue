@@ -70,6 +70,7 @@ async function assignLivraison() {
 
     if (response.ok) {
       alert('Colis assigné à la livraison avec succès !');
+      props.colis.IdLivraison = selectedLivraisonId.value;
     } else {
       alert('Erreur lors de l\'assignation du colis à la livraison');
     }
