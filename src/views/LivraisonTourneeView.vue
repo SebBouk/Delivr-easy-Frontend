@@ -26,6 +26,7 @@ onMounted(async () => {
         <thead>
           <tr class="bg-gray-200 text-gray-700">
             <th class="p-3 text-sm font-medium">Numéro de livraison</th>
+            <th class="p-3 text text-sm font-medium">Nombre de colis</th>
             <th class="col-span-3 p-3 text-sm font-medium "></th>
             <th></th>
           </tr>

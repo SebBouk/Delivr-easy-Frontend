@@ -4,5 +4,6 @@ export interface Livraison {
   LivraisonArrive : boolean;
   SignatureClient : string;
   IdTournée: number;
+  NombreColis : number;
   }
   

@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { TourneeAvecEmploye } from '@/models/TourneeAvecEmploye';
 import { useRouter } from 'vue-router';
-import { computed, ref, onMounted, defineEmits } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 
 const props = defineProps<{
   tournee: TourneeAvecEmploye;
 }>();
 
-const emit = defineEmits(['create-livraison']);
 
 const livRouteur = useRouter();
 const isEditing = ref(false);

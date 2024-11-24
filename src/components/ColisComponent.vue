@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { Colis } from '@/models/Colis';
 import { onMounted, ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const props = defineProps<{
     colis : Colis;
 }>();
 
+const route = useRoute();
 const LivRouteur = useRouter()
 const SignRouter = useRouter()
 
@@ -91,15 +92,15 @@ async function assignLivraison() {
         <td><button @click="gotoLiv">{{ props.colis.IdLivraison }}</button></td>
         <td><input type="checkbox" v-model="isSigned" ></td>
         <td><button @click="goToSign">Signature</button></td>
-        <td>
-      <select v-model="selectedLivraisonId">
+        <td v-if="route.path === '/colis'">
+      <select  v-model="selectedLivraisonId">
         <option value="" disabled>Choisir une livraison</option>
         <option v-for="livraison in allLivraisons" :key="livraison.IdLivraison" :value="livraison.IdLivraison">
           {{ livraison.IdLivraison }}
         </option>
       </select>
     </td>
-    <td><button @click="assignLivraison">Assigner à la livraison</button></td>
+    <td v-if="route.path === '/colis'"><button @click="assignLivraison">Assigner à la livraison</button></td>
   
     </tr>
 </template>
