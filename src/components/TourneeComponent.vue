@@ -12,9 +12,10 @@ const livRouteur = useRouter();
 const isEditing = ref(false);
 const DateTournee = ref(props.tournee.DateTournee || '');
 const IdTournee = ref(props.tournee.IdTournee);
+const localTournee = ref({ ...props.tournee });
 
-const employes = ref<{ IdEmploye: number; NomEmploye: string }[]>([]);
-const selectedEmployeId = ref<number | null>(props.tournee.IdEmploye || null);
+const employes = ref<{ IdEmploye: number | null ; NomEmploye: string }[]>([]);
+const selectedEmployeId = ref<number | any>(localTournee.value.IdEmploye || null);
 
 const notifications = ref<
   {
@@ -105,7 +106,7 @@ async function addDate() {
     });
     if (response.ok) {
       showNotification('success', 'Date ajoutée avec succès.');
-      props.tournee.DateTournee = DateTournee.value;
+      localTournee.value.DateTournee = DateTournee.value;
     } else {
       showNotification('error', 'Erreur lors de l’ajout de la date.');
     }
@@ -118,7 +119,7 @@ async function addDate() {
 function cancelEdit() {
   isEditing.value = false;
   DateTournee.value = props.tournee.DateTournee;
-  selectedEmployeId.value = props.tournee.IdEmploye;
+  selectedEmployeId.value = localTournee.value.IdEmploye;
 }
 
 async function updateEmploye() {
@@ -136,9 +137,8 @@ async function updateEmploye() {
 
     if (response.ok) {
       showNotification('success', 'Employé mis à jour avec succès.');
-      props.tournee.IdEmploye = selectedEmployeId.value;
-      props.tournee.NomEmploye =
-        employes.value.find((e) => e.IdEmploye === selectedEmployeId.value)?.NomEmploye || '';
+      localTournee.value.IdEmploye = selectedEmployeId.value;
+      localTournee.value.NomEmploye = employes.value.find((e) => e.IdEmploye === selectedEmployeId.value)?.NomEmploye || '';
       isEditing.value = false;
     } else {
       showNotification('error', "Erreur lors de la mise à jour de l'employé.");

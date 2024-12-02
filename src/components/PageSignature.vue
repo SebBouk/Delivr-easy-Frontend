@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { TourneeAvecEmploye } from '@/models/TourneeAvecEmploye';
 import { jwtDecode } from 'jwt-decode';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -50,9 +49,7 @@ function clearCanvas() {
 }
 
 const colisRouteur = useRouter();
-const props = defineProps<{
-  tournee: TourneeAvecEmploye;
-}>();
+
 function getIdEmployeFromCookie(): string | null {
   const cookies = document.cookie.split('; ').map((cookie) => cookie.trim());
   const tokenCookie = cookies.find((cookie) => cookie.startsWith('token='));
@@ -72,7 +69,6 @@ function getIdEmployeFromCookie(): string | null {
 async function saveSignature() {
   const NumColis = route.params.NumColis;
   const canvas = signaturePad.value;
-  const idTournee = route.params.IdTournee;
   const idEmploye = getIdEmployeFromCookie();
 
   console.log(NumColis);
@@ -100,6 +96,10 @@ async function saveSignature() {
     alert('Erreur : numColis manquant');
   }
 }
+function goBack() {
+  colisRouteur.go(-1);
+}
+
 </script>
 
 <template>
@@ -127,6 +127,12 @@ async function saveSignature() {
       >
         Enregistrer la Signature
       </button>
+      <button
+         class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+         @click="goBack"
+       >
+         Retour
+       </button>
     </div>
   </div>
 </template>
