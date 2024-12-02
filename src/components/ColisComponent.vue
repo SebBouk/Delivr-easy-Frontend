@@ -179,7 +179,7 @@ function cancelEdit() {
 
     <!-- Sinon, afficher le commentaire existant ou un texte "Ajouter un commentaire..." -->
     <div v-else @click="editCommentaire" class="cursor-pointer">
-      <p v-if="props.colis.Commentaire" class="bg-gray-100 p-2 rounded-md">
+      <p v-if="localColis.Commentaire" class="bg-gray-100 p-2 rounded-md">
         {{ localColis.Commentaire }}
       </p>
       <p v-else class="text-gray-500 italic">Ajouter un commentaire...</p>
