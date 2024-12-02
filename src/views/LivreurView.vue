@@ -92,8 +92,9 @@ onMounted(async () => {
             <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium">Date de Livraison</th>
             <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium">Poids</th>
             <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium">Livraison</th>
-            <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium">Signature</th>
-            <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium"></th>
+            <th class="col-span-2 p-3 text-left text-xs sm:text-sm md:text-base font-medium">Signature</th>
+            <th></th>
+            <th class="p-3 text-left text-xs sm:text-sm md:text-base font-medium">Commentaires</th>
           </tr>
         </thead>
         <tbody>

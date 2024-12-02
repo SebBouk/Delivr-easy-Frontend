@@ -99,7 +99,6 @@ const updatePassword = async () => {
 
 <template>
   <div class="login-background">
-    <NotificationComponent />
     <div class="flex justify-center items-center min-h-screen">
       <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <h1 class="text-2xl font-semibold mb-6 text-center">Connexion</h1>
@@ -213,7 +212,7 @@ const updatePassword = async () => {
 
 <style scoped>
 .login-background {
-  background-image: url('@/assets/Loginbox.webp');
+  background-image: url('@/assets/Designer.jpeg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -221,12 +220,12 @@ const updatePassword = async () => {
   width: 100vw;
 }
 
-.flex {
+/* .flex {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}
+} */
 
 .max-w-md {
   max-width: 500px;
